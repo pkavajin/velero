@@ -314,6 +314,10 @@ func getParentSnapshot(log logrus.FieldLogger, pvcUID string, podVolumeBackupLis
 			continue
 		}
 
+		if backupStorageLocation != backup.Spec.BackupStorageLocation {
+			continue
+		}
+
 		if mostRecentBackup == nil || backup.Status.StartTimestamp.After(mostRecentBackup.Status.StartTimestamp.Time) {
 			mostRecentBackup = backup
 		}
